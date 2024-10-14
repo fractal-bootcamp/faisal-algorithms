@@ -6,11 +6,11 @@ const SearchAlgorithms: React.FC<SearchAlgorithmProps> = ({
     onAlgorithmSelect
 }) => {
     return (
-        <div>
-            <label>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
                 Select Search Algorithm:
             </label>
-            <select onChange={(e) => onAlgorithmSelect(e.target.value)}>
+            <select onChange={(e) => onAlgorithmSelect(e.target.value)} className="block w-full p-2 border border-gray-300 rounded-md">
                 <option value="">--Select--</option>
                 <option value="Linear Search">Linear Search</option>
                 <option value="Binary Search">Binary Search</option>

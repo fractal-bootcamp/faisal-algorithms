@@ -82,35 +82,35 @@ const AlgorithmVisualizer: React.FC<AlgorithmVisualizerProps> = ({ algorithm }) 
 
     const selectedAlgo = algorithmInfo[algorithm]
     return (
-        <div>
-            <h2>
+        <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
                 Visualization for {algorithm}
             </h2>
             <div>
                 {selectedAlgo
                     ? (
-                        <div>
-                            <p>
+                        <div className="space-y-2">
+                            <p className="font-semibold text-gray-700">
                                 Description:
                             </p>
-                            <p>
+                            <p className="text-gray-600">
                                 {selectedAlgo.description}
                             </p>
-                            <p>
+                            <p className="font-semibold text-gray-700">
                                 Time Complexity:
                             </p>
-                            <p>
+                            <p className="text-gray-600">
                                 {selectedAlgo.timeComplexity}
                             </p>
-                            <p>
+                            <p className="font-semibold text-gray-700">
                                 Space Complexity:
                             </p>
-                            <p>
+                            <p className="text-gray-600">
                                 {selectedAlgo.spaceComplexity}
                             </p>
                         </div>
                     ) : (
-                        <p>
+                        <p className="text-gray-500">
                             Select an algorithm to visualize.
                         </p>
                     )

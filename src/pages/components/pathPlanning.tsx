@@ -1,4 +1,3 @@
-
 const PathPlanning = () => {
     // logic for Dijkstra visualization
     const algorithmInfo = {
@@ -12,28 +11,28 @@ const PathPlanning = () => {
     const selectedAlgo = algorithmInfo
 
     return (
-        <div>
-            <h2>
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
                 Dijkstra's Algorithm
             </h2>
             <div>
-                <div>
-                    <p>
+                <div className="space-y-2">
+                    <p className="font-semibold text-gray-700">
                         Description:
                     </p>
-                    <p>
+                    <p className="text-gray-600">
                         {selectedAlgo.description}
                     </p>
-                    <p>
+                    <p className="font-semibold text-gray-700">
                         Time Complexity:
                     </p>
-                    <p>
+                    <p className="text-gray-600">
                         {selectedAlgo.timeComplexity}
                     </p>
-                    <p>
+                    <p className="font-semibold text-gray-700">
                         Space Complexity:
                     </p>
-                    <p>
+                    <p className="text-gray-600">
                         {selectedAlgo.spaceComplexity}
                     </p>
                 </div>
