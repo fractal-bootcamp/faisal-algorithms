@@ -7,7 +7,10 @@ interface Step {
 }
 
 // implementation to record each step
-export const binarySearch = (arr: number[], target: number): Step[] => {
+export const binarySearch = (
+    arr: number[] = [1, 3, 5, 7, 9],
+    target: number = 7
+): Step[] => {
     const steps: Step[] = [] // empty array to hold the steps of the algo
     let left = 0 // initialize the left pointer to the beginning of the array
     let right = arr.length - 1 // initialize the right pointer to the end of the array

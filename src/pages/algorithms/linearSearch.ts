@@ -5,7 +5,10 @@ interface Step {
 }
 
 // implementation to record each step
-export const linearSearch = (arr: number[], target: number): Step[] => {
+export const linearSearch = (
+    arr: number[] = [1, 3, 5, 7, 9],
+    target: number = 7
+): Step[] => {
     const steps: Step[] = [] // empty array to hold the steps of the algo
 
     // loop though the array, checking each element 

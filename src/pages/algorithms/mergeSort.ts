@@ -40,7 +40,7 @@ const merge = (
 }
 
 // implementation to record each step
-export const mergeSort = (arr: number[]): MergeSortStep[] => {
+export const mergeSort = (arr: number[] = [5, 1, 4, 2, 8]): MergeSortStep[] => {
     const steps: MergeSortStep[] = [] // empty array to hold the steps of the algo
 
     // helper function for recursive merge sort
