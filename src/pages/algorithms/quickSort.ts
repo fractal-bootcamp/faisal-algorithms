@@ -6,7 +6,7 @@ interface QuickSortStep {
 }
 
 // implementation to record each step
-export const quickSort = (arr: number[]): QuickSortStep[] => {
+export const quickSort = (arr: number[] = [4, 1, 4, 2, 8]): QuickSortStep[] => {
     const steps: QuickSortStep[] = [] // empty array to hold the steps of the algo
     const array = [...arr] // create a copy of the array to sort
 

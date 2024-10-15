@@ -6,7 +6,7 @@ interface SelectionSortStep {
 }
 
 // implementation to record each step
-export const selectionSort = (arr: number[]): SelectionSortStep[] => {
+export const selectionSort = (arr: number[] = [5, 1, 4, 2, 8]): SelectionSortStep[] => {
     const steps: SelectionSortStep[] = [] // empty array to hold the steps of the algo
     const n = arr.length
     const array = [...arr] // create a copy of the array to sort

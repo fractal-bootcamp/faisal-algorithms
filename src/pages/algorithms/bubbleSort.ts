@@ -5,7 +5,7 @@ interface BubbleSortStep {
 }
 
 // implementation to record each step
-export const bubbleSort = (arr: number[]): BubbleSortStep[] => {
+export const bubbleSort = (arr: number[] = [5, 1, 4, 2, 8]): BubbleSortStep[] => {
     const steps: BubbleSortStep[] = [] // empty array to hold the steps of the algo
     const n = arr.length
     const array = [...arr] // create a copy of the array to sort
