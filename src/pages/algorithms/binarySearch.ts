@@ -1,5 +1,5 @@
 interface Step {
-    array: number[] // array being search
+    array: number[] // array being searched
     left: number // left boundary of the search range
     right: number // right boundary of the search range
     middle: number // middle index being checked
@@ -39,6 +39,5 @@ export const binarySearch = (arr: number[], target: number): Step[] => {
             right = middle - 1
         }
     }
-    // return the list of steps recorded
-    return steps
+    return steps // return the list of steps recorded
 }

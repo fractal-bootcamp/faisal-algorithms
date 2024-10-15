@@ -25,6 +25,7 @@ export const breadthFirstSearch = (
             queue: [...queue], // copy of the current queue state
             visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1), // record visited nodes
         }
+        // push current step to the steps array for visualization
         steps.push(currentStep)
 
         // if the target node is found, exit the loop
@@ -38,5 +39,5 @@ export const breadthFirstSearch = (
             }
         }
     }
-    return steps // return list of stepsn recorded
+    return steps // return list of steps recorded
 }

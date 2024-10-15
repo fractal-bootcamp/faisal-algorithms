@@ -37,5 +37,5 @@ export const depthFirstSearch = (
         }
     }
     dfs(start) // start dfs from the starting node
-    return steps // return list of stepsn recorded
+    return steps // return list of steps recorded
 }
