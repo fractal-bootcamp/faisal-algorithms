@@ -5,16 +5,16 @@ interface BubbleSortStep {
 }
 
 // implementation to record each step
-export const bubbleSort = (arr: number[] = [5, 1, 4, 2, 8]): BubbleSortStep[] => {
+export const bubbleSort = (arr: number[] = [5, 1, 4, 2, 8, 6, 3, 7]): BubbleSortStep[] => {
     const steps: BubbleSortStep[] = [] // empty array to hold the steps of the algo
-    const n = arr.length
     const array = [...arr] // create a copy of the array to sort
+    const n = arr.length
 
     // perform bubble sort
-    for (let i = 0; n - 1; i++) {
+    for (let i = 0; i < n - 1; i++) {
         for (let j = 0; j < n - i - 1; j++) {
             const currentStep: BubbleSortStep = {
-                array: [...arr], // copy of the array at this step
+                array: [...array], // copy of the array at this step
                 comparedIndices: [j, j + 1], // indices being compared
                 swapped: false, // intially set to false
             }
