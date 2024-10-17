@@ -5,6 +5,7 @@ import { bubbleSort } from "../algorithms/bubbleSort";
 import { selectionSort } from "../algorithms/selectionSort";
 import { insertionSort } from "../algorithms/insertionSort";
 import { mergeSort } from "../algorithms/mergeSort";
+import { quickSort } from "../algorithms/quickSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState("")
@@ -21,6 +22,8 @@ const SortPage = () => {
             setSteps(insertionSort())
         } else if (algorithm === "Merge Sort") {
             setSteps(mergeSort())
+        } else if (algorithm === "Quick Sort") {
+            setSteps(quickSort())
         }
     }
 
@@ -173,6 +176,74 @@ const SortPage = () => {
         )
     }
 
+    const renderQuickSortStep = (step: any, isSorted: boolean) => {
+        return (
+            <div className="flex flex-col items-center space-y-4">
+                <div className="flex justify-center space-x-2">
+                    {step.array.map((value: number, index: number) => (
+                        <div
+                            key={index}
+                            className={`w-16 bg-white border
+                    ${isSorted
+                                    ? "bg-green-300"
+                                    : index === step.pivotIndex
+                                        ? "bg-yellow-300"
+                                        : "bg-white"
+                                }`}
+                            style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                        >
+                            <div className="text-center text-sm text-gray-700 font-semibold">
+                                {value}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {!isSorted && (
+                    <div className="flex justify-center items-start space-x-8">
+                        <div className="flex flex-col items-center">
+                            <div className="text-gray-600 font-semibold">
+                                Left Partition:
+                            </div>
+                            <div className="flex space-x-2">
+                                {step.leftPartition.map((value: number, index: number) => (
+                                    <div
+                                        key={`left-${index}`}
+                                        className="w-16 bg-blue-100 border"
+                                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                                    >
+                                        <div className="text-center text-sm text-gray-700 font-semibold">
+                                            {value}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col items-center">
+                            <div className="text-gray-600 font-semibold">
+                                Right Partition:
+                            </div>
+                            <div className="flex space-x-2">
+                                {step.rightPartition.map((value: number, index: number) => (
+                                    <div
+                                        key={`right-${index}`}
+                                        className="w-16 bg-blue-100 border"
+                                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                                    >
+                                        <div className="text-center text-sm text-gray-700 font-semibold">
+                                            {value}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        )
+    }
+
     const renderStep = (step: any, currentStepIndex: number, totalSteps: number) => {
         const isSorted = currentStepIndex === totalSteps - 1 // check if we are at the last step
         if (selectedAlgo === "Bubble Sort") {
@@ -183,6 +254,8 @@ const SortPage = () => {
             return renderInsertionSortStep(step, isSorted)
         } else if (selectedAlgo === "Merge Sort") {
             return renderMergeSortStep(step, isSorted)
+        } else if (selectedAlgo === "Quick Sort") {
+            return renderQuickSortStep(step, isSorted)
         }
         return (
             <div>
