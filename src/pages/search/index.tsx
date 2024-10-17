@@ -81,15 +81,27 @@ const SearchPage = () => {
 
     // logic for DFS/BFS
     const renderGraphSearchStep = (step: any) => {
+        // ensure step.visited and step.node are defined
+        if (!step || !step.visited || step.node === undefined) {
+            return (
+                <div>
+                    No data available for rendering.
+                </div>
+            )
+        }
+
+        // node from 0 to maximum node number in the graph
+        const graphNodes = Array.from({ length: 5 }, (_, index) => index)
+
         return (
             <div className="flex justify-center space-x-2">
-                {step.array.map((value: number, index: number) => (
+                {graphNodes.map((value: number) => (
                     <div
-                        key={index}
+                        key={value}
                         className={`px-6 py-4 border 
-                    ${step.visited.includes(index)
+                    ${step.visited.includes(value)
                                 ? "bg-green-300"
-                                : index === step.node
+                                : value === step.node
                                     ? "bg-yellow-300"
                                     : "bg-white"
                             }`}
@@ -122,7 +134,7 @@ const SearchPage = () => {
             <SearchAlgorithms
                 onAlgorithmSelect={setSelectedAlgo}
             />
-            {selectedAlgo && (
+            {(selectedAlgo === "Linear Search" || selectedAlgo === "Binary Search") && (
                 <div>
                     <label className="block text-gray-700 font-semibold mb-2">
                         Select Target

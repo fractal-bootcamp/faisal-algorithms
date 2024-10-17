@@ -25,14 +25,12 @@ export const breadthFirstSearch = (
     while (queue.length > 0) {
         const node = queue.shift()! // dequeue the next node
 
-        // record the current step
-        const currentStep: BFSNodeStep = {
+        // push current step to the steps array for visualization
+        steps.push({
             node, // current node being processed
             queue: [...queue], // copy of the current queue state
             visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1), // record visited nodes
-        }
-        // push current step to the steps array for visualization
-        steps.push(currentStep)
+        })
 
         // if the target node is found, exit the loop
         if (node === target) break
