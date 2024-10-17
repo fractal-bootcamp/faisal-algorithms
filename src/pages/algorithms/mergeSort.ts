@@ -33,8 +33,8 @@ const merge = (
     // record current state of the array and the two halves being merged
     steps.push({
         array: [...result], // copy of the merged array at this step
-        leftHalf: left, // left half of the array 
-        rightHalf: right, // right half of the array
+        leftHalf: [...left], // left half of the array 
+        rightHalf: [...right], // right half of the array
     })
     return result // return the merged array
 }
@@ -53,11 +53,11 @@ export const mergeSort = (arr: number[] = [5, 1, 4, 2, 8, 6, 3, 7]): MergeSortSt
 
         // split array into two halves
         const mid = Math.floor(array.length / 2) // calculate middle index
-        const left = array.slice(0, mid) // left half of array
-        const right = array.slice(mid) // right half of array
+        const left = sort(array.slice(0, mid)) // sort left half of array
+        const right = sort(array.slice(mid)) // sort right half of array
 
         // recursively sort both halves and then merge them
-        return merge(sort(left), sort(right), steps)
+        return merge(left, right, steps)
     }
     sort(arr) // start the recusive sorting process
     return steps // return the list of steps recorded

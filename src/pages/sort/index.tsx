@@ -4,6 +4,7 @@ import AlgorithmVisualizer from "../components/algoVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
 import { selectionSort } from "../algorithms/selectionSort";
 import { insertionSort } from "../algorithms/insertionSort";
+import { mergeSort } from "../algorithms/mergeSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState("")
@@ -18,6 +19,8 @@ const SortPage = () => {
             setSteps(selectionSort())
         } else if (algorithm === "Insertion Sort") {
             setSteps(insertionSort())
+        } else if (algorithm === "Merge Sort") {
+            setSteps(mergeSort())
         }
     }
 
@@ -89,12 +92,83 @@ const SortPage = () => {
                                         ? "bg-blue-300"
                                         : "bg-white"
                             }`}
+                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height
                     >
                         <div className="text-center text-sm text-gray-700 font-semibold">
                             {value}
                         </div>
                     </div>
                 ))}
+            </div>
+        )
+    }
+
+    const renderMergeSortStep = (step: any, isSorted: boolean) => {
+        return (
+            <div className="flex flex-col items-center space-y-4">
+                <div className="flex justify-center space-x-2">
+                    {step.array.map((value: number, index: number) => (
+                        <div
+                            key={index}
+                            className={`w-16 bg-white border
+                    ${isSorted
+                                    ? "bg-green-300"
+                                    : "bg-white"
+                                }`}
+                            style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                        >
+                            <div className="text-center text-sm text-gray-700 font-semibold">
+                                {value}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex space-x-2">
+                    <div className="text-gray-600 font-semibold">
+                        Merging:
+                    </div>
+                </div>
+
+                <div className="flex justify-center items-start space-x-8">
+                    <div className="flex flex-col items-center">
+                        <div className="text-gray-600 font-semibold">
+                            Left:
+                        </div>
+                        <div className="flex space-x-2">
+                            {step.leftHalf.map((value: number, index: number) => (
+                                <div
+                                    key={`left-${index}`}
+                                    className="w-16 bg-blue-100 border"
+                                    style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                                >
+                                    <div className="text-center text-sm text-gray-700 font-semibold">
+                                        {value}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                        <div className="text-gray-600 font-semibold">
+                            Right:
+                        </div>
+                        <div className="flex space-x-2">
+                            {step.rightHalf.map((value: number, index: number) => (
+                                <div
+                                    key={`right-${index}`}
+                                    className="w-16 bg-blue-100 border"
+                                    style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
+                                >
+                                    <div className="text-center text-sm text-gray-700 font-semibold">
+                                        {value}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -106,7 +180,9 @@ const SortPage = () => {
         } else if (selectedAlgo === "Selection Sort") {
             return renderSelectionSortStep(step, isSorted)
         } else if (selectedAlgo === "Insertion Sort") {
-            return renderSelectionSortStep(step, isSorted)
+            return renderInsertionSortStep(step, isSorted)
+        } else if (selectedAlgo === "Merge Sort") {
+            return renderMergeSortStep(step, isSorted)
         }
         return (
             <div>
