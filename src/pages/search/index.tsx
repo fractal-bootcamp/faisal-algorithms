@@ -5,14 +5,13 @@ import { linearSearch } from "../algorithms/linearSearch";
 import { binarySearch } from "../algorithms/binarySearch";
 import { depthFirstSearch } from "../algorithms/depthFirstSearch";
 import { breadthFirstSearch } from "../algorithms/breadthFirstSearch";
-import { n } from "@clerk/clerk-react/dist/controlComponents-CByvIpDK";
 
 const SearchPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState("")
     const [steps, setSteps] = useState<any[]>([])
     const [target, setTarget] = useState<number>(7)
 
-    const defaultArray = [1, 3, 5, 7, 9]
+    const defaultArray = [1, 3, 5, 7, 9, 11, 13, 15, 17]
 
     // recalculate steps whenever target or algo changes
     useEffect(() => {
@@ -30,14 +29,14 @@ const SearchPage = () => {
         }
     }, [selectedAlgo, target])
 
-    // render each step
-    const renderStep = (step: any) => {
+    // functions to render each step based on algo selected
+    const renderLinearSearchStep = (step: any) => {
         return (
             <div className="flex justify-center space-x-2">
                 {step.array.map((value: number, index: number) => (
                     <div
                         key={index}
-                        className={`p-4 border 
+                        className={`px-6 py-4 border 
                         ${step.found && index === step.currentIndex
                                 ? "bg-green-300"
                                 : index === step.currentIndex
@@ -50,6 +49,69 @@ const SearchPage = () => {
                 ))}
             </div>
         )
+    }
+
+    const renderBinarySearchStep = (step: any) => {
+        return (
+            <div className="flex flex-col space-y-2">
+                {step.arrays.map((array: number[], stepIndex: number) => (
+                    <div
+                        key={stepIndex}
+                        className="flex justify-center space-x-2"
+                    >
+                        {array.map((value: number, index: number) => (
+                            <div
+                                key={index}
+                                className={`px-6 py-4 border
+                                ${stepIndex === step.arrays.length - 1 && index === step.middle
+                                        ? step.found
+                                            ? "bg-green-300"
+                                            : "bg-yellow-300"
+                                        : "bg-white"
+                                    }`}
+                            >
+                                {value}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    // logic for DFS/BFS
+    const renderGraphSearchStep = (step: any) => {
+        return (
+            <div className="flex justify-center space-x-2">
+                {step.array.map((value: number, index: number) => (
+                    <div
+                        key={index}
+                        className={`px-6 py-4 border 
+                    ${step.visited.includes(index)
+                                ? "bg-green-300"
+                                : index === step.node
+                                    ? "bg-yellow-300"
+                                    : "bg-white"
+                            }`}
+                    >
+                        {value}
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    const renderStep = (step: any) => {
+        if (selectedAlgo === "Binary Search") {
+            return renderBinarySearchStep(step)
+        } else if (
+            selectedAlgo === "Depth-First Search" ||
+            selectedAlgo === "Breadth-First Search"
+        ) {
+            return renderGraphSearchStep(step)
+        } else {
+            return renderLinearSearchStep(step)
+        }
     }
 
     return (
