@@ -3,6 +3,7 @@ import SortAlgorithm from "../components/sortAlgo";
 import AlgorithmVisualizer from "../components/algoVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
 import { selectionSort } from "../algorithms/selectionSort";
+import { insertionSort } from "../algorithms/insertionSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState("")
@@ -10,11 +11,13 @@ const SortPage = () => {
 
     const handleSelection = (algorithm: string) => {
         setSelectedAlgo(algorithm)
-
+        // generate steps for selection sort
         if (algorithm === "Bubble Sort") {
-            setSteps(bubbleSort()) // generate steps for bubble sort
+            setSteps(bubbleSort())
         } else if (algorithm === "Selection Sort") {
-            setSteps(selectionSort()) // generate steps for selection sort
+            setSteps(selectionSort())
+        } else if (algorithm === "Insertion Sort") {
+            setSteps(insertionSort())
         }
     }
 
@@ -71,11 +74,38 @@ const SortPage = () => {
         )
     }
 
+    const renderInsertionSortStep = (step: any, isSorted: boolean) => {
+        return (
+            <div className="flex justify-center spaxe-x-2">
+                {step.array.map((value: number, index: number) => (
+                    <div
+                        key={index}
+                        className={`w-16 bg-white border
+                    ${isSorted
+                                ? "bg-green-300"
+                                : index === step.currentIndex
+                                    ? "bg-yellow-300"
+                                    : index === step.comparedIndex
+                                        ? "bg-blue-300"
+                                        : "bg-white"
+                            }`}
+                    >
+                        <div className="text-center text-sm text-gray-700 font-semibold">
+                            {value}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
     const renderStep = (step: any, currentStepIndex: number, totalSteps: number) => {
         const isSorted = currentStepIndex === totalSteps - 1 // check if we are at the last step
         if (selectedAlgo === "Bubble Sort") {
             return renderBubbleSortStep(step, isSorted)
         } else if (selectedAlgo === "Selection Sort") {
+            return renderSelectionSortStep(step, isSorted)
+        } else if (selectedAlgo === "Insertion Sort") {
             return renderSelectionSortStep(step, isSorted)
         }
         return (

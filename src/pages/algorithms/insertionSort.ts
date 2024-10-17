@@ -6,7 +6,7 @@ interface InsertionSortStep {
 }
 
 // implementation to record each step
-export const insertionSort = (arr: number[] = [5, 1, 4, 2, 8]): InsertionSortStep[] => {
+export const insertionSort = (arr: number[] = [5, 1, 4, 2, 8, 6, 3, 7]): InsertionSortStep[] => {
     const steps: InsertionSortStep[] = [] // empty array to hold the steps of the algo
     const array = [...arr] // create a copy of the array to sort
 
@@ -15,31 +15,36 @@ export const insertionSort = (arr: number[] = [5, 1, 4, 2, 8]): InsertionSortSte
         let key = array[i] // element to be inserted
         let j = i - 1
 
+        // record the initial step before starting the inner loop, 
+        steps.push({
+            array: [...array],
+            currentIndex: i,
+            comparedIndex: j,
+            inserted: false
+        })
+
+        // shift elements to the right to make space for the key element
         while (j >= 0 && array[j] > key) {
-            const currentStep: InsertionSortStep = {
-                array: [...arr], // copy of the array at this step
+            array[j + 1] = array[j] // shift element
+            steps.push({
+                array: [...array], // copy of the array at this step
                 currentIndex: i, // element being inserted
                 comparedIndex: j, // element being compared
                 inserted: false, // initially set to false
-            }
-
-            array[j + 1] = array[j] // shift the element to the right
-            steps.push(currentStep) // push current step to the steps array for visualization
+            })
             j--
         }
 
         // insert the element at the correct position
         array[j + 1] = key
 
-        const finalStep: InsertionSortStep = {
-            array: [...arr], // copy of the array after insertion
+        // push current step to the steps array for visualization
+        steps.push({
+            array: [...array], // copy of the array after insertion
             currentIndex: i,
             comparedIndex: j + 1, // position where the insertion was made
             inserted: true, // record that the insertion happened
-        }
-
-        // push current step to the steps array for visualization
-        steps.push(finalStep)
+        })
     }
     return steps // return the list of steps recorded
 }
