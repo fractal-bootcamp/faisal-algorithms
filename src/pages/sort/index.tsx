@@ -2,6 +2,7 @@ import { useState } from "react";
 import SortAlgorithm from "../components/sortAlgo";
 import AlgorithmVisualizer from "../components/algoVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
+import { selectionSort } from "../algorithms/selectionSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState("")
@@ -12,6 +13,8 @@ const SortPage = () => {
 
         if (algorithm === "Bubble Sort") {
             setSteps(bubbleSort()) // generate steps for bubble sort
+        } else if (algorithm === "Selection Sort") {
+            setSteps(selectionSort()) // generate steps for selection sort
         }
     }
 
@@ -42,10 +45,38 @@ const SortPage = () => {
         )
     }
 
+    const renderSelectionSortStep = (step: any, isSorted: boolean) => {
+        return (
+            <div className="flex justify-center space-x-2">
+                {step.array.map((value: number, index: number) => (
+                    <div
+                        key={index}
+                        className={`w-16 bg-white border
+                        ${isSorted
+                                ? "bg-green-300"
+                                : index === step.currentIndex
+                                    ? "bg-yellow-300"
+                                    : index === step.minIndex
+                                        ? "bg-blue-300"
+                                        : "bg-white"
+                            }`}
+                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height
+                    >
+                        <div className="text-center text-sm text-gray-700 font-semibold">
+                            {value}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
     const renderStep = (step: any, currentStepIndex: number, totalSteps: number) => {
         const isSorted = currentStepIndex === totalSteps - 1 // check if we are at the last step
         if (selectedAlgo === "Bubble Sort") {
             return renderBubbleSortStep(step, isSorted)
+        } else if (selectedAlgo === "Selection Sort") {
+            return renderSelectionSortStep(step, isSorted)
         }
         return (
             <div>

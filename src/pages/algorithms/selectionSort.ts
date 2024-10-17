@@ -6,10 +6,10 @@ interface SelectionSortStep {
 }
 
 // implementation to record each step
-export const selectionSort = (arr: number[] = [5, 1, 4, 2, 8]): SelectionSortStep[] => {
+export const selectionSort = (arr: number[] = [5, 1, 4, 2, 8, 6, 3, 7]): SelectionSortStep[] => {
     const steps: SelectionSortStep[] = [] // empty array to hold the steps of the algo
-    const n = arr.length
     const array = [...arr] // create a copy of the array to sort
+    const n = arr.length
 
     // perform selection sort
     for (let i = 0; i < n - 1; i++) {
@@ -20,20 +20,27 @@ export const selectionSort = (arr: number[] = [5, 1, 4, 2, 8]): SelectionSortSte
                 minIndex = j
             }
         }
-        const currentStep: SelectionSortStep = {
-            array: [...arr], // copy of the array at this step
+
+        // push current step before the swap
+        steps.push({
+            array: [...array], // copy of the array at this step
             currentIndex: i, // current element being considered
-            minIndex, // index of the minimum element found
-            swapped: i !== minIndex // record whether a swap occured
-        }
+            minIndex, // min index that was swapped
+            swapped: i !== minIndex, // record wether a swap occured
+        })
 
         // swap the found minimum element with the current element if necessary
         if (i !== minIndex) {
             [array[i], array[minIndex]] = [array[minIndex], array[i]]
         }
 
-        // push current step to the steps array for visualization
-        steps.push(currentStep)
+        // push the step after the swap
+        steps.push({
+            array: [...array], // array after the swap
+            currentIndex: i, // still the current index
+            minIndex, // min index that was swapped
+            swapped: i !== minIndex, // ensure we show the swap
+        })
     }
     return steps // return list of steps recorded
 }
