@@ -1,5 +1,7 @@
+import { Algorithms } from "./algoVisualizer"
+
 interface SortAlgorithmProps {
-    onAlgorithmSelect: (algorithm: string) => void
+    onAlgorithmSelect: (algorithm: Algorithms) => void
 }
 
 const SortAlgorithms: React.FC<SortAlgorithmProps> = ({
@@ -10,7 +12,7 @@ const SortAlgorithms: React.FC<SortAlgorithmProps> = ({
             <label className="block text-gray-700 font-semibold mb-2">
                 Select Sort Algorithm:
             </label>
-            <select onChange={(e) => onAlgorithmSelect(e.target.value)} className="block w-full p-2 border border-gray-300 rounded-md">
+            <select onChange={(e) => onAlgorithmSelect(e.target.value as Algorithms)} className="block w-full p-2 border border-gray-300 rounded-md">
                 <option value="">--Select--</option>
                 <option value="Bubble Sort">Bubble Sort</option>
                 <option value="Selection Sort">Selection Sort</option>

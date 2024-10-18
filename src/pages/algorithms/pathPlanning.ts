@@ -3,6 +3,7 @@ interface DijkstraStep {
     distances: number[] // distance from the start node to all other nodes
     visited: boolean[] // boolean array to keep track of the visited nodes
     queue: [number, number][] // priority queue (or min-heap) showing the node and its current distance
+    graph: number[][] // adding graph for visualization
 }
 
 const defaultGraph = [
@@ -65,6 +66,7 @@ export const dijkstra = (
             distances: [...distances], // current distance array
             visited: [...visited], // visited nodes array
             queue: [...queue], // current state of the priority queue
+            graph: [...graph], //current graph
         })
     }
     return steps // return the list of steps recorded

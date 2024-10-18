@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import SearchAlgorithms from "../components/searchAlgo";
 import AlgorithmVisualizer from "../components/algoVisualizer";
+import { Algorithms } from "../components/algoVisualizer";
 import { linearSearch } from "../algorithms/linearSearch";
 import { binarySearch } from "../algorithms/binarySearch";
 import { depthFirstSearch } from "../algorithms/depthFirstSearch";
 import { breadthFirstSearch } from "../algorithms/breadthFirstSearch";
-import { motion, steps } from "framer-motion";
+import { dijkstra } from "../algorithms/pathPlanning";
+import { motion } from "framer-motion";
 
 const SearchPage = () => {
-    const [selectedAlgo, setSelectedAlgo] = useState("")
+    const [selectedAlgo, setSelectedAlgo] = useState<Algorithms>("")
     const [steps, setSteps] = useState<any[]>([])
     const [target, setTarget] = useState<number>(7)
     const [allStacks, setAllStacks] = useState<any[]>([])
@@ -389,7 +391,7 @@ const SearchPage = () => {
                 Search Algorithms
             </h1>
             <SearchAlgorithms
-                onAlgorithmSelect={setSelectedAlgo}
+                onAlgorithmSelect={(algo) => setSelectedAlgo(algo)}
             />
             {(selectedAlgo === "Linear Search" || selectedAlgo === "Binary Search") && (
                 <div>
