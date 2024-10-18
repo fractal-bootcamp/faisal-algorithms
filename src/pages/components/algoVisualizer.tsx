@@ -120,7 +120,7 @@ const AlgorithmVisualizer: React.FC<AlgorithmVisualizerProps> = ({
                 if (interval) clearInterval(interval)
             }
         }
-    }, [isPlaying, currentStepIndex, steps.length])
+    }, [isPlaying, nextStep, currentStepIndex, steps.length])
 
     const selectedAlgo = algorithmInfo[algorithm]
 

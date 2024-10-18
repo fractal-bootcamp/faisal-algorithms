@@ -40,7 +40,7 @@ export const depthFirstSearch = (
         if (node === target) return
 
         // recursively visit all unvisited neighbors
-        for (let neighbor of graph[node]) {
+        for (const neighbor of graph[node]) {
             if (!visited[neighbor]) {
                 dfs(neighbor)
             }
