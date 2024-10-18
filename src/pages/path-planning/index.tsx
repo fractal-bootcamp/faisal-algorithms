@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 const PathPlanningPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState<Algorithms>("Dijkstra's Algorithm")
     const [steps, setSteps] = useState<any[]>([])
-    const [currentStep, setCurrentStep] = useState<number>(0)
-
 
     useEffect(() => {
         if (selectedAlgo === "Dijkstra's Algorithm") {

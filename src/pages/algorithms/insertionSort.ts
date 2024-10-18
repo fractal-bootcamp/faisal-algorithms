@@ -12,7 +12,7 @@ export const insertionSort = (arr: number[] = [5, 1, 4, 2, 8, 6, 3, 7]): Inserti
 
     // perform insertion sort
     for (let i = 1; i < array.length; i++) {
-        let key = array[i] // element to be inserted
+        const key = array[i] // element to be inserted
         let j = i - 1
 
         // record the initial step before starting the inner loop, 

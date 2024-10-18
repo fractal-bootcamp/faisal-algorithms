@@ -51,7 +51,7 @@ export const breadthFirstSearch = (
         if (node === target) break
 
         // visit all the unvisited neighbors
-        for (let neighbor of graph[node]) {
+        for (const neighbor of graph[node]) {
             if (!visited[neighbor]) {
                 visited[neighbor] = true
                 queue.push(neighbor) // enqueuq the neighbor for future processing

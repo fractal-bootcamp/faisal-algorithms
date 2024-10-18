@@ -14,7 +14,7 @@ export const binarySearch = (
     const steps: Step[] = [] // empty array to hold the steps of the algo
     let left = 0 // initialize the left pointer to the beginning of the array
     let right = arr.length - 1 // initialize the right pointer to the end of the array
-    let arrays = [arr.slice()] // start with full array
+    const arrays = [arr.slice()] // start with full array
 
     // continue searching while the left pointer is less than or equal to the right pointer
     while (left <= right) {

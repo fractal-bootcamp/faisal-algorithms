@@ -6,7 +6,6 @@ import { linearSearch } from "../algorithms/linearSearch";
 import { binarySearch } from "../algorithms/binarySearch";
 import { depthFirstSearch } from "../algorithms/depthFirstSearch";
 import { breadthFirstSearch } from "../algorithms/breadthFirstSearch";
-import { dijkstra } from "../algorithms/pathPlanning";
 import { motion } from "framer-motion";
 
 const SearchPage = () => {
