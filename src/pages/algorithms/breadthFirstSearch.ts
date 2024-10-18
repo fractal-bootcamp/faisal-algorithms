@@ -2,6 +2,8 @@ interface BFSNodeStep {
     node: number // node currently being processed
     queue: number[] // queue of nodes to visit
     visited: number[] // list of nodes visited
+    dequeuedNodes: number[] // list of processed nodes
+    graph: number[][] //
 }
 
 // implementation for graph traversal to record each step
@@ -19,17 +21,30 @@ export const breadthFirstSearch = (
     const steps: BFSNodeStep[] = [] // empty array to hold the steps of the algo
     const queue: number[] = [start] // initialize the queue with the starting node
     const visited: boolean[] = new Array(graph.length).fill(false) // track visited nodes
+    const dequeuedNodes: number[] = [] // initialize dequeued nodes list
     visited[start] = true // mark the starting node as visited
 
     // continue processing nodes while there are still nodes in the queue
     while (queue.length > 0) {
-        const node = queue.shift()! // dequeue the next node
+        // push before dequeueing to capture current state
+        steps.push({
+            node: queue[0], // current node that will be processed
+            queue: [...queue], // copy of the current queue state
+            visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1), // record visited nodes
+            dequeuedNodes: [...dequeuedNodes], // copy of current dequeued nodes
+            graph: graph,
+        })
 
-        // push current step to the steps array for visualization
+        const node = queue.shift()! // dequeue the next node
+        dequeuedNodes.push(node) // add the node th dequeued nodes
+
+        // push after dequeueing to capture updated state
         steps.push({
             node, // current node being processed
             queue: [...queue], // copy of the current queue state
             visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1), // record visited nodes
+            dequeuedNodes: [...dequeuedNodes], // copy of current dequeued nodes
+            graph: graph,
         })
 
         // if the target node is found, exit the loop
