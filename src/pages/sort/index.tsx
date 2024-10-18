@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SortAlgorithm from "../components/sortAlgo";
-import AlgorithmVisualizer from "../components/algoVisualizer";
+import AlgorithmVisualizer, { Algorithms } from "../components/algoVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
 import { selectionSort } from "../algorithms/selectionSort";
 import { insertionSort } from "../algorithms/insertionSort";
@@ -8,21 +8,21 @@ import { mergeSort } from "../algorithms/mergeSort";
 import { quickSort } from "../algorithms/quickSort";
 
 const SortPage = () => {
-    const [selectedAlgo, setSelectedAlgo] = useState("")
+    const [selectedAlgo, setSelectedAlgo] = useState<Algorithms>("")
     const [steps, setSteps] = useState<any[]>([])
 
-    const handleSelection = (algorithm: string) => {
-        setSelectedAlgo(algorithm)
+    const handleSelection = (algo: Algorithms) => {
+        setSelectedAlgo(algo)
         // generate steps for selection sort
-        if (algorithm === "Bubble Sort") {
+        if (algo === "Bubble Sort") {
             setSteps(bubbleSort())
-        } else if (algorithm === "Selection Sort") {
+        } else if (algo === "Selection Sort") {
             setSteps(selectionSort())
-        } else if (algorithm === "Insertion Sort") {
+        } else if (algo === "Insertion Sort") {
             setSteps(insertionSort())
-        } else if (algorithm === "Merge Sort") {
+        } else if (algo === "Merge Sort") {
             setSteps(mergeSort())
-        } else if (algorithm === "Quick Sort") {
+        } else if (algo === "Quick Sort") {
             setSteps(quickSort())
         }
     }
@@ -270,7 +270,7 @@ const SortPage = () => {
                 Sort Algorithms
             </h1>
             <SortAlgorithm
-                onAlgorithmSelect={handleSelection}
+                onAlgorithmSelect={(algo) => handleSelection(algo)}
             />
             {selectedAlgo && steps.length > 0 && (
                 <div className="mt-8">
