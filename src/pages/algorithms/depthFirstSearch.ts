@@ -1,6 +1,8 @@
 interface DFSNodeStep {
     node: number // node currently being visited
     visited: number[] // list of nodes visited 
+    stack: number[] // stack of nodes during DFS
+    graph: number[][]
 }
 
 // implementation for graph traversal to record each step
@@ -17,17 +19,21 @@ export const depthFirstSearch = (
 ): DFSNodeStep[] => {
     const steps: DFSNodeStep[] = [] // empty array to hold the steps of the algo
     const visited: boolean[] = new Array(graph.length).fill(false) // track visited nodes
+    const stack: number[] = []
 
     // helper function
     function dfs(node: number) {
         if (visited[node]) return; // if the node has already been visited, return early
         visited[node] = true; // mark the node as visited
+        stack.push(node) // push node to stack
 
 
         // push current step to the steps array for visualization
         steps.push({
             node, // current node being visited
-            visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1) // record visited nodes
+            visited: visited.map((v, i) => (v ? i : -1)).filter(i => i !== -1), // record visited nodes
+            stack: [...stack], // push the stack state
+            graph: [...graph], // include graph in the step
         })
 
         // if the target node is found, exit early
@@ -39,6 +45,7 @@ export const depthFirstSearch = (
                 dfs(neighbor)
             }
         }
+        stack.pop() // pop the stack after exploring the node
     }
     dfs(start) // start dfs from the starting node
     return steps // return list of steps recorded
