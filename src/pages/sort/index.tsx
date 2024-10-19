@@ -1,11 +1,12 @@
 import { useState } from "react";
-import SortAlgorithm from "../../components/sortAlgo";
-import AlgorithmVisualizer, { Algorithms } from "../../components/algoVisualizer";
-import { bubbleSort } from "../../algorithms/bubbleSort";
-import { selectionSort } from "../../algorithms/selectionSort";
-import { insertionSort } from "../../algorithms/insertionSort";
-import { mergeSort } from "../../algorithms/mergeSort";
-import { quickSort } from "../../algorithms/quickSort";
+import SortAlgorithm from "../components/sortAlgo";
+import AlgorithmVisualizer, { Algorithms } from "../components/algoVisualizer";
+import SortingBar from "../components/SortingBar";
+import { bubbleSort } from "../algorithms/bubbleSort";
+import { selectionSort } from "../algorithms/selectionSort";
+import { insertionSort } from "../algorithms/insertionSort";
+import { mergeSort } from "../algorithms/mergeSort";
+import { quickSort } from "../algorithms/quickSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState<Algorithms>("")
@@ -32,23 +33,13 @@ const SortPage = () => {
         return (
             <div className="flex justify-center space-x-2">
                 {step.array.map((value: number, index: number) => (
-                    <div
+                    <SortingBar
                         key={index}
-                        className={`w-16 bg-white border
-                        ${isSorted
-                                ? "bg-green-300"
-                                : step.comparedIndices.includes(index)
-                                    ? step.swapped
-                                        ? "bg-yellow-300"
-                                        : "bg-blue-300"
-                                    : "bg-white"
-                            }`}
-                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height
-                    >
-                        <div className="text-center text-sm text-gray-700 font-semibold">
-                            {value}
-                        </div>
-                    </div>
+                        value={value}
+                        isSorted={isSorted}
+                        isCompared={step.comparedIndices.includes(index)}
+                        isSwapped={step.comparedIndices.includes(index) && step.swapped}
+                    />
                 ))}
             </div>
         )
@@ -58,23 +49,13 @@ const SortPage = () => {
         return (
             <div className="flex justify-center space-x-2">
                 {step.array.map((value: number, index: number) => (
-                    <div
+                    <SortingBar
                         key={index}
-                        className={`w-16 bg-white border
-                        ${isSorted
-                                ? "bg-green-300"
-                                : index === step.currentIndex
-                                    ? "bg-yellow-300"
-                                    : index === step.minIndex
-                                        ? "bg-blue-300"
-                                        : "bg-white"
-                            }`}
-                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height
-                    >
-                        <div className="text-center text-sm text-gray-700 font-semibold">
-                            {value}
-                        </div>
-                    </div>
+                        value={value}
+                        isSorted={isSorted}
+                        isCurrentIndex={index === step.currentIndex}
+                        isMinIndex={index === step.isMinIndex}
+                    />
                 ))}
             </div>
         )
@@ -84,23 +65,13 @@ const SortPage = () => {
         return (
             <div className="flex justify-center spaxe-x-2">
                 {step.array.map((value: number, index: number) => (
-                    <div
+                    <SortingBar
                         key={index}
-                        className={`w-16 bg-white border
-                    ${isSorted
-                                ? "bg-green-300"
-                                : index === step.currentIndex
-                                    ? "bg-yellow-300"
-                                    : index === step.comparedIndex
-                                        ? "bg-blue-300"
-                                        : "bg-white"
-                            }`}
-                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height
-                    >
-                        <div className="text-center text-sm text-gray-700 font-semibold">
-                            {value}
-                        </div>
-                    </div>
+                        value={value}
+                        isSorted={isSorted}
+                        isCurrentIndex={index === step.currentIndex}
+                        isCompared={index === step.comparedIndex}
+                    />
                 ))}
             </div>
         )
@@ -111,19 +82,11 @@ const SortPage = () => {
             <div className="flex flex-col items-center space-y-4">
                 <div className="flex justify-center space-x-2">
                     {step.array.map((value: number, index: number) => (
-                        <div
+                        <SortingBar
                             key={index}
-                            className={`w-16 bg-white border
-                    ${isSorted
-                                    ? "bg-green-300"
-                                    : "bg-white"
-                                }`}
-                            style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                        >
-                            <div className="text-center text-sm text-gray-700 font-semibold">
-                                {value}
-                            </div>
-                        </div>
+                            value={value}
+                            isSorted={isSorted}
+                        />
                     ))}
                 </div>
 
@@ -140,15 +103,11 @@ const SortPage = () => {
                         </div>
                         <div className="flex space-x-2">
                             {step.leftHalf.map((value: number, index: number) => (
-                                <div
+                                <SortingBar
                                     key={`left-${index}`}
-                                    className="w-16 bg-blue-100 border"
-                                    style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                                >
-                                    <div className="text-center text-sm text-gray-700 font-semibold">
-                                        {value}
-                                    </div>
-                                </div>
+                                    value={value}
+                                    className="bg-blue-100"
+                                />
                             ))}
                         </div>
                     </div>
@@ -159,15 +118,11 @@ const SortPage = () => {
                         </div>
                         <div className="flex space-x-2">
                             {step.rightHalf.map((value: number, index: number) => (
-                                <div
+                                <SortingBar
                                     key={`right-${index}`}
-                                    className="w-16 bg-blue-100 border"
-                                    style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                                >
-                                    <div className="text-center text-sm text-gray-700 font-semibold">
-                                        {value}
-                                    </div>
-                                </div>
+                                    value={value}
+                                    className="bg-blue-100"
+                                />
                             ))}
                         </div>
                     </div>
@@ -181,21 +136,12 @@ const SortPage = () => {
             <div className="flex flex-col items-center space-y-4">
                 <div className="flex justify-center space-x-2">
                     {step.array.map((value: number, index: number) => (
-                        <div
-                            key={index}
-                            className={`w-16 bg-white border
-                    ${isSorted
-                                    ? "bg-green-300"
-                                    : index === step.pivotIndex
-                                        ? "bg-yellow-300"
-                                        : "bg-white"
-                                }`}
-                            style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                        >
-                            <div className="text-center text-sm text-gray-700 font-semibold">
-                                {value}
-                            </div>
-                        </div>
+                        <SortingBar
+                            key={`left-${index}`}
+                            value={value}
+                            isSorted={isSorted}
+                            isPivot={index === step.isPivotIndex}
+                        />
                     ))}
                 </div>
 
@@ -207,15 +153,11 @@ const SortPage = () => {
                             </div>
                             <div className="flex space-x-2">
                                 {step.leftPartition.map((value: number, index: number) => (
-                                    <div
+                                    <SortingBar
                                         key={`left-${index}`}
-                                        className="w-16 bg-blue-100 border"
-                                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                                    >
-                                        <div className="text-center text-sm text-gray-700 font-semibold">
-                                            {value}
-                                        </div>
-                                    </div>
+                                        value={value}
+                                        className="bg-blue-100"
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -226,15 +168,11 @@ const SortPage = () => {
                             </div>
                             <div className="flex space-x-2">
                                 {step.rightPartition.map((value: number, index: number) => (
-                                    <div
+                                    <SortingBar
                                         key={`right-${index}`}
-                                        className="w-16 bg-blue-100 border"
-                                        style={{ height: `${value * 20}px` }} // each value is visualized as a bar with dynamic height  
-                                    >
-                                        <div className="text-center text-sm text-gray-700 font-semibold">
-                                            {value}
-                                        </div>
-                                    </div>
+                                        value={value}
+                                        className="bg-blue-100"
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -246,22 +184,25 @@ const SortPage = () => {
 
     const renderStep = (step: any, currentStepIndex: number, totalSteps: number) => {
         const isSorted = currentStepIndex === totalSteps - 1 // check if we are at the last step
-        if (selectedAlgo === "Bubble Sort") {
-            return renderBubbleSortStep(step, isSorted)
-        } else if (selectedAlgo === "Selection Sort") {
-            return renderSelectionSortStep(step, isSorted)
-        } else if (selectedAlgo === "Insertion Sort") {
-            return renderInsertionSortStep(step, isSorted)
-        } else if (selectedAlgo === "Merge Sort") {
-            return renderMergeSortStep(step, isSorted)
-        } else if (selectedAlgo === "Quick Sort") {
-            return renderQuickSortStep(step, isSorted)
+
+        switch (selectedAlgo) {
+            case "Bubble Sort":
+                return renderBubbleSortStep(step, isSorted)
+            case "Selection Sort":
+                return renderSelectionSortStep(step, isSorted)
+            case "Insertion Sort":
+                return renderInsertionSortStep(step, isSorted)
+            case "Merge Sort":
+                return renderMergeSortStep(step, isSorted)
+            case "Quick Sort":
+                return renderQuickSortStep(step, isSorted)
+            default:
+                return (
+                    <div>
+                        No Sorting algorithm selected.
+                    </div>
+                )
         }
-        return (
-            <div>
-                No Sorting algorithm selected.
-            </div>
-        )
     }
 
     return (
