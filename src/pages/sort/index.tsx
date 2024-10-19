@@ -1,11 +1,11 @@
 import { useState } from "react";
-import SortAlgorithm from "../components/sortAlgo";
-import AlgorithmVisualizer, { Algorithms } from "../components/algoVisualizer";
-import { bubbleSort } from "../algorithms/bubbleSort";
-import { selectionSort } from "../algorithms/selectionSort";
-import { insertionSort } from "../algorithms/insertionSort";
-import { mergeSort } from "../algorithms/mergeSort";
-import { quickSort } from "../algorithms/quickSort";
+import SortAlgorithm from "../../components/sortAlgo";
+import AlgorithmVisualizer, { Algorithms } from "../../components/algoVisualizer";
+import { bubbleSort } from "../../algorithms/bubbleSort";
+import { selectionSort } from "../../algorithms/selectionSort";
+import { insertionSort } from "../../algorithms/insertionSort";
+import { mergeSort } from "../../algorithms/mergeSort";
+import { quickSort } from "../../algorithms/quickSort";
 
 const SortPage = () => {
     const [selectedAlgo, setSelectedAlgo] = useState<Algorithms>("")

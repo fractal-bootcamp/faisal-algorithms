@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import SearchAlgorithms from "../components/searchAlgo";
-import AlgorithmVisualizer from "../components/algoVisualizer";
-import { Algorithms } from "../components/algoVisualizer";
-import { linearSearch } from "../algorithms/linearSearch";
-import { binarySearch } from "../algorithms/binarySearch";
-import { depthFirstSearch } from "../algorithms/depthFirstSearch";
-import { breadthFirstSearch } from "../algorithms/breadthFirstSearch";
+import SearchAlgorithms from "../../components/searchAlgo";
+import AlgorithmVisualizer from "../../components/algoVisualizer";
+import { Algorithms } from "../../components/algoVisualizer";
+import { linearSearch } from "../../algorithms/linearSearch";
+import { binarySearch } from "../../algorithms/binarySearch";
+import { depthFirstSearch } from "../../algorithms/depthFirstSearch";
+import { breadthFirstSearch } from "../../algorithms/breadthFirstSearch";
 import { motion } from "framer-motion";
 
 const SearchPage = () => {
