@@ -1,6 +1,6 @@
-import AlgorithmVisualizer, { Algorithms } from "../../components/algoVisualizer";
+import AlgorithmVisualizer, { Algorithms } from "../components/algoVisualizer";
 import { useEffect, useState } from "react";
-import { dijkstra } from "../../algorithms/pathPlanning";
+import { dijkstra } from "../algorithms/pathPlanning";
 import { motion } from "framer-motion";
 
 const PathPlanningPage = () => {
